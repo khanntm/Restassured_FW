@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Failed suite [Weather API Test Suite]" guice-stage="DEVELOPMENT" verbose="0">
+  <test thread-count="5" name="Geo API Tests(failed)" verbose="0">
+    <classes>
+      <class name="tests.GeoCodingTest">
+        <methods>
+          <include name="setup"/>
+          <include name="tearDown"/>
+          <include name="TC_01_testSearchCityByName"/>
+          <include name="setupReport"/>
+          <include name="TC_02_testSearchByZipcode"/>
+          <include name="tearDownReport"/>
+        </methods>
+      </class> <!-- tests.GeoCodingTest -->
+      <class name="tests.AirPollutionTest">
+        <methods>
+          <include name="setup"/>
+          <include name="tearDown"/>
+          <include name="TC_01_testGetAirPollutionByCity"/>
+          <include name="setupReport"/>
+          <include name="TC_02_testAirQualityByCity"/>
+          <include name="tearDownReport"/>
+        </methods>
+      </class> <!-- tests.AirPollutionTest -->
+    </classes>
+  </test> <!-- Geo API Tests(failed) -->
+</suite> <!-- Failed suite [Weather API Test Suite] -->
