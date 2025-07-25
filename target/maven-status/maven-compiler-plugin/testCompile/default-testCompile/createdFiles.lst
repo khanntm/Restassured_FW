@@ -1,3 +1,6 @@
 base\BaseTest.class
+utils\AirQualityEvaluator.class
 tests\GeoCodingTest.class
+utils\ExtentManager.class
+tests\AirPollutionTest.class
 utils\ConfigManager.class

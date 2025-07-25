@@ -13,6 +13,11 @@ public class ConfigManager {
     private static Map<String, String> configMap = new HashMap<>();
 
     static {
+
+        String envName = System.getProperty("env", "dev").toUpperCase();
+        Environment environment = Environment.valueOf(envName);
+        String configFilePath = environment.getConfigFilePath();
+
         try (BufferedReader br = new BufferedReader(new FileReader(CONFIG_FILE))) {
             String line;
             br.readLine(); // skip header

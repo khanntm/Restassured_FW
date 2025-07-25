@@ -18,27 +18,26 @@ public class AirPollutionTest extends BaseTest {
     private final double DEFAULT_LON = 106.660172;
 
     @Test
-    public void TC_01_testGetAirPollutionByCity() {
-        test = extent.createTest("TC_01 - AirPollutionAPI - Air Pollution by City");
-
+    public void testGetAirPollutionByCity() {
+        test = extent.createTest("AirPollutionAPI - Air Pollution by City");
         List<String> cities = ConfigManager.getCityList("src/test/resources/cities.csv");
 
         for (String city : cities) {
-            test.info("Testing air pollution for city: " + city);
+            //test.info("Testing air pollution for city: " + city);
 
             Map<String, String> geoParams = new HashMap<>();
             geoParams.put("q", city);
             geoParams.put("limit", "1");
 
-            Response geoResponse = sendGetWithApiKey("/geo/1.0/direct", geoParams);
-
+            //Response geoResponse = sendGetWithApiKey("/geo/1.0/direct", geoParams);
+            Response geoResponse = sendRequestWithApiKey("GET", "/geo/1.0/direct", geoParams, null);
             double lat = DEFAULT_LAT;
             double lon = DEFAULT_LON;
 
             if (geoResponse.statusCode() == 200 && geoResponse.jsonPath().getList("$").size() > 0) {
                 lat = geoResponse.jsonPath().getDouble("[0].lat");
                 lon = geoResponse.jsonPath().getDouble("[0].lon");
-                test.info("Retrieved lat/lon: " + lat + ", " + lon);
+                //test.info("Retrieved lat/lon: " + lat + ", " + lon);
             } else {
                 test.warning("Could not retrieve lat/lon for city: " + city + ". Using default values.");
             }
@@ -47,26 +46,20 @@ public class AirPollutionTest extends BaseTest {
             pollutionParams.put("lat", String.valueOf(lat));
             pollutionParams.put("lon", String.valueOf(lon));
 
-            Response pollutionResponse = sendGetWithApiKey("/data/2.5/air_pollution", pollutionParams);
+            //Response pollutionResponse = sendGetWithApiKey("/data/2.5/air_pollution", pollutionParams);
+            Response pollutionResponse = sendRequestWithApiKey("GET", "/data/2.5/air_pollution", pollutionParams, null);
 
             assertEquals(pollutionResponse.statusCode(), 200, "Status code should be 200");
             test.pass("Air pollution data retrieved successfully for city: " + city);
 
             double aqi = pollutionResponse.jsonPath().getDouble("list[0].main.aqi");
-            test.info("Air Quality Index (AQI) for " + city + ": " + aqi);
+            //test.info("Air Quality Index (AQI) for " + city + ": " + aqi);
 
             assertTrue(aqi >= 1 && aqi <= 5, "AQI should be between 1 and 5");
 
             //verify lon & lat in response
             double actualLat = pollutionResponse.jsonPath().getDouble("coord.lat");
             double actualLon = pollutionResponse.jsonPath().getDouble("coord.lon");
-
-
-            /* //assertEquals(actualLat, lat, 0.00001, "Lat does not match with expected");
-            test.pass("Lat matches expected value: " + lat);
-
-            //assertEquals(actualLon, lon, 0.00001,"Lon does not match with expected");
-            test.pass("Lon matches expected value: " + lon); */
 
             int expectedLatInt = (int) lat;
             int expectedLonInt = (int) lon;
@@ -80,11 +73,14 @@ public class AirPollutionTest extends BaseTest {
             assertEquals(actualLonInt, expectedLonInt, "Lon does not match with expected");
             test.pass("Lon matches expected value: " + lon);
 
+            String fullUrl = buildFullUrl("/geo/1.0/direct", geoParams);
+            test.info("**Full Request URL:**\n" + fullUrl);
+
         }
     }
 
     public void checkAirQualityEvaluatorLogic() {
-        test = extent.createTest("TC_02 - Test AirQualityEvaluator Logic");
+        test = extent.createTest("Test AirQualityEvaluator Logic");
 
         // Case 1: All values in "Good" range
         String result1 = AirQualityEvaluator.evaluateAirQuality(10, 20, 10, 5, 30, 1000);
@@ -113,19 +109,20 @@ public class AirPollutionTest extends BaseTest {
     }
 
     @Test
-    public void TC_02_testAirQualityByCity() {
-        test = extent.createTest("TC_02 - AirPollutionAPI - Test Air Quality by City");
+    public void testAirQualityByCity() {
+        test = extent.createTest("AirPollutionAPI - Test Air Quality by City");
 
         List<String> cities = ConfigManager.getCityList("src/test/resources/cities.csv");
 
         for (String city : cities) {
-            test.info("Testing air pollution for city: " + city);
+            //test.info("Testing air pollution for city: " + city);
 
             Map<String, String> geoParams = new HashMap<>();
             geoParams.put("q", city);
             geoParams.put("limit", "1");
 
-            Response geoResponse = sendGetWithApiKey("/geo/1.0/direct", geoParams);
+            //Response geoResponse = sendGetWithApiKey("/geo/1.0/direct", geoParams);
+            Response geoResponse = sendRequestWithApiKey("GET", "/geo/1.0/direct", geoParams, null);
 
             double lat = DEFAULT_LAT;
             double lon = DEFAULT_LON;
@@ -133,7 +130,7 @@ public class AirPollutionTest extends BaseTest {
             if (geoResponse.statusCode() == 200 && geoResponse.jsonPath().getList("$").size() > 0) {
                 lat = geoResponse.jsonPath().getDouble("[0].lat");
                 lon = geoResponse.jsonPath().getDouble("[0].lon");
-                test.info("Retrieved lat/lon: " + lat + ", " + lon);
+                //test.info("Retrieved lat/lon: " + lat + ", " + lon);
             } else {
                 test.warning("Could not retrieve lat/lon for city: " + city + ". Using default values.");
             }
@@ -142,7 +139,10 @@ public class AirPollutionTest extends BaseTest {
             pollutionParams.put("lat", String.valueOf(lat));
             pollutionParams.put("lon", String.valueOf(lon));
 
-            Response pollutionResponse = sendGetWithApiKey("/data/2.5/air_pollution", pollutionParams);
+            //Response pollutionResponse = sendGetWithApiKey("/data/2.5/air_pollution", pollutionParams);
+            Response pollutionResponse = sendRequestWithApiKey("GET", "/data/2.5/air_pollution", pollutionParams, null);
+
+
             assertEquals(pollutionResponse.statusCode(), 200, "Status code should be 200");
             test.pass("Air pollution data retrieved successfully for city: " + city);
 
@@ -158,7 +158,10 @@ public class AirPollutionTest extends BaseTest {
 
             // Evaluate air quality
             String quality = AirQualityEvaluator.evaluateAirQuality(so2, no2, pm10, pm25, o3, co);
-            test.info("Evaluated Air Quality for " + city + ": " + quality);
+            //test.info("Evaluated Air Quality for " + city + ": " + quality);
+
+            String fullUrl = buildFullUrl("/geo/1.0/direct", geoParams);
+            test.info("**Full Request URL:**\n" + fullUrl);
         }
 
     }

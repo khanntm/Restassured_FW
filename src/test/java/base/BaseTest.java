@@ -2,54 +2,80 @@ package base;
 
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
-import com.weatherapi.utils.ExtentManager;
 import io.restassured.RestAssured;
+import io.restassured.http.ContentType;
 import io.restassured.response.Response;
+import io.restassured.specification.RequestSpecification;
 import org.testng.annotations.AfterSuite;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeSuite;
 import utils.ConfigManager;
+import utils.ExtentManager;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class BaseTest {
-
-
-
     protected static ExtentReports extent;
     protected static ExtentTest test;
 
-
-    /* @BeforeSuite
-    public void setupReport() {
-        extent = ExtentManager.createInstance("test-output/ExtentReport.html");
+    @BeforeSuite
+    public void beforeSuite() {
+        RestAssured.baseURI = ConfigManager.get("baseUrl");
+        extent = ExtentManager.getInstance();
     }
 
     @AfterSuite
-    public void tearDownReport() {
-        extent.flush();
-    } */
-
-
-    @BeforeClass
-    public void setup() {
-        RestAssured.baseURI = ConfigManager.get("baseUrl");
+    public void afterSuite() {
+        if (extent != null) {
+            extent.flush();
+        }
     }
 
-    @AfterClass
-    public void tearDown() {
-        System.out.println("Finished tests in " + this.getClass().getSimpleName());
-    }
-
-    public Response sendGetWithApiKey(String endpoint, Map<String, String> params) {
+    public Response sendRequestWithApiKey(String method, String endpoint, Map<String, String> params, Object body) {
+        if (params == null) {
+            params = new HashMap<>();
+        }
         params.put("appid", ConfigManager.get("apiKey"));
-        return RestAssured
+
+        RequestSpecification request = RestAssured
                 .given()
+                .log().all()
                 .queryParams(params)
-                .when()
-                .get(endpoint)
-                .then()
-                .extract().response();
+                .contentType(ContentType.JSON);
+
+        if (body != null) {
+            request.body(body);
+        }
+
+        switch (method.toUpperCase()) {
+            case "GET":
+                return request.when().get(endpoint).then().log().all().extract().response();
+            case "POST":
+                return request.when().post(endpoint).then().log().all().extract().response();
+            case "PUT":
+                return request.when().put(endpoint).then().log().all().extract().response();
+            case "DELETE":
+                return request.when().delete(endpoint).then().log().all().extract().response();
+            default:
+                throw new IllegalArgumentException("Unsupported HTTP method: " + method);
+        }
     }
+
+    public String buildFullUrl(String endpoint, Map<String, String> params) {
+        StringBuilder url = new StringBuilder(RestAssured.baseURI);
+        if (!endpoint.startsWith("/")) {
+            url.append("/");
+        }
+        url.append(endpoint);
+
+        if (params != null && !params.isEmpty()) {
+            url.append("?");
+            params.forEach((key, value) -> url.append(key).append("=").append(value).append("&"));
+            url.setLength(url.length() - 1); // remove trailing &
+        }
+
+        return url.toString();
+    }
+
+
 }

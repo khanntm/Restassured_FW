@@ -8,6 +8,9 @@ import utils.ConfigManager;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import model.Location;
+import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
+
 
 import static org.testng.Assert.*;
 
@@ -15,20 +18,19 @@ public class GeoCodingTest extends BaseTest {
 
     @Test
     //Call function sendGetWithApiKey() from BaseTest
-    public void TC_01_testSearchCityByName() {
-        test = extent.createTest("TC_01 - GeoCodingAPI - Search City By Name");
+    public void testSearchCityByName() {
+        test = extent.createTest("GeoCodingAPI - Search City By Name");
 
         List<String> cities = ConfigManager.getCityList("src/test/resources/cities.csv");
 
         for (String city : cities) {
-            test.info("Testing city: " + city);
-
-
+            //test.info("Testing city: " + city);
             Map<String, String> params = new HashMap<>();
             params.put("q", city);
             params.put("limit", "1");
 
-            Response response = sendGetWithApiKey("/geo/1.0/direct", params);
+            //Response response = sendGetWithApiKey("/geo/1.0/direct", params);
+            Response response = sendRequestWithApiKey("GET", "/geo/1.0/direct", params, null);
 
             assertEquals(response.statusCode(), 200, "Status code should be 200");
             test.pass("Status code is 200 for city: " + city);
@@ -36,61 +38,91 @@ public class GeoCodingTest extends BaseTest {
             double lat = response.jsonPath().getDouble("[0].lat");
             double lon = response.jsonPath().getDouble("[0].lon");
 
-            test.info("Latitude: " + lat);
-            test.info("Longitude: " + lon);
+            //test.info("Latitude: " + lat);
+            //test.info("Longitude: " + lon);
 
             assertTrue(lat != 0, "Latitude should not be 0");
             assertTrue(lon != 0, "Longitude should not be 0");
             test.pass("Latitude and Longitude are valid for city: " + city);
 
+            /* Use jsonPath():
             String actualCityName = response.jsonPath().getString("[0].name");
             assertEquals(actualCityName.toLowerCase(), city.toLowerCase(), "City name does not match");
-            test.pass("City name matches expected value: " + city);
+            //test.pass("City name matches expected value: " + city); */
+
+            Location[] locations = response.as(Location[].class);  // convert JSON to array of POJO
+            Location location = locations[0];
+
+            System.out.println("City: " + location.name);
+            System.out.println("Latitude: " + location.lat);
+            System.out.println("In Japanese: " + location.local_names.get("ja"));
+
+
+            test.pass("Verified using POJO: name, lat, lon for city: " + city);
+
+            //Verify schema match with expected
+            response.then().assertThat().body(matchesJsonSchemaInClasspath("schema/geocoding-schema.json"));
+            test.pass("Response matches expected JSON schema");
+
+            String fullUrl = buildFullUrl("/geo/1.0/direct", params);
+            test.info("**Full Request URL:**\n" + fullUrl);
 
         }
     }
 
     @Test
-    public void TC_02_testSearchByZipcode() {
-        test = extent.createTest("TC_02 - GeoCodingAPI - Search City by Zipcode: E14,GB");
+    public void testSearchByZipcode() {
+        test = extent.createTest("GeoCodingAPI - Search City by Zipcode: E14,GB");
 
         Map<String, String> params = new HashMap<>();
         params.put("zip", "E14,GB");
         params.put("limit","1");
 
-        Response response = sendGetWithApiKey("/geo/1.0/zip",params);
+        //Send request API GET method
+        Response response = sendRequestWithApiKey("GET", "/geo/1.0/zip", params, null);
 
-        test.info("API called with zip = E14,GB");
-
+        //Verify status Code
         assertEquals(response.statusCode(), 200, "Status code should be 200");
         test.pass("Status code is 200");
 
-        double lat = response.jsonPath().getDouble("lat");
-        double lon = response.jsonPath().getDouble("lon");
+        // Use POJO for convert response
+        Location location = response.as(Location.class);  // convert JSON to array of POJO
 
-        test.info("Latitude: " + lat);
-        test.info("Longitude: " + lon);
+        System.out.println("City: " + location.name);
+        System.out.println("Latitude: " + location.lat);
+        System.out.println("Lon: " + location.lon);
+        System.out.println("Country: " + location.country);
 
-        assertTrue(lat != 0, "Latitude should not be 0");
-        assertTrue(lon != 0, "Longitude should not be 0");
-        test.pass("Latitude and Longitude are valid");
+        //Assertions and Extent report
+        assertTrue(location.lat != 0, "Latitude should not be 0");
+        assertTrue(location.lon != 0, "Longitude should not be 0");
+        test.pass("Lat and lon are valid");
 
         String expectedZipCountry = "E14,GB";
-        String actualZipCountry = response.jsonPath().getString("zip") + "," + response.jsonPath().getString("country");
-
-        assertEquals(actualZipCountry, expectedZipCountry, "Zip and country do not match");
+        String actualZipCountry = location.zip + "," + location.country;
+        assertEquals(actualZipCountry, expectedZipCountry, "Zip and country are match");
         test.pass("Zip and country match expected value: " + expectedZipCountry);
+
+        test.pass("Verified using POJO name, lat, lon for city: " + location.name);
+
+        //Verify schema
+        response.then().assertThat().body(matchesJsonSchemaInClasspath("schema/geocoding-city.json"));
+        test.pass("Response matches expected JSON schema");
+
+        String fullUrl = buildFullUrl("/geo/1.0/zip", params);
+        test.info("**Full Request URL:**\n" + fullUrl);
+
     }
 
     @Test
-    public void TC_03_testSearchCityWithoutApiKey() {
-        test = extent.createTest("TC_03 - GeoCodingAPI - Search City Without API Key");
+    public void testSearchCityWithoutApiKey() {
+        test = extent.createTest("GeoCodingAPI - Search City Without API Key");
 
         Map<String, String> params = new HashMap<>();
         params.put("q", "London");
         params.put("limit", "1");
 
-        // Gửi request mà không thêm API key
+        // Send request without API Key
         Response response = io.restassured.RestAssured
                 .given()
                 .queryParams(params)
@@ -99,14 +131,17 @@ public class GeoCodingTest extends BaseTest {
                 .then()
                 .extract().response();
 
-        test.info("Sent request to /geo/1.0/direct without API key");
+        //test.info("Sent request to /geo/1.0/direct without API key");
 
         int statusCode = response.statusCode();
-        test.info("Received status code: " + statusCode);
+        //test.info("Received status code: " + statusCode);
 
-        // Kiểm tra mã lỗi (tùy vào API, có thể là 401 hoặc 400)
-        assertTrue(statusCode == 401 || statusCode == 400, "Expected 401 or 400 when API key is missing");
+        // Check response status as 401
+        assertTrue(statusCode == 401, "Expected 401 when API key is missing");
         test.pass("API returned expected error status when API key is missing");
+
+        String fullUrl = buildFullUrl("/geo/1.0/direct", params);
+        test.info("**Full Request URL:**\n" + fullUrl);
     }
 
 

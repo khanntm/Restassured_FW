@@ -103,27 +103,27 @@
                     <div class="method-list-content passed suite-Weather_API_Test_Suite">
                       <span>
                         <img src="passed.png" width="3%"/>
-                        <a href="#" panel-name="suite-Weather_API_Test_Suite" title="tests.AirPollutionTest" class="method navigator-link" hash-for-method="TC_01_testGetAirPollutionByCity">TC_01_testGetAirPollutionByCity</a> <!-- method navigator-link -->
+                        <a href="#" panel-name="suite-Weather_API_Test_Suite" title="tests.AirPollutionTest" class="method navigator-link" hash-for-method="testAirQualityByCity">testAirQualityByCity</a> <!-- method navigator-link -->
                       </span>
                       <br/>
                       <span>
                         <img src="passed.png" width="3%"/>
-                        <a href="#" panel-name="suite-Weather_API_Test_Suite" title="tests.GeoCodingTest" class="method navigator-link" hash-for-method="TC_01_testSearchCityByName">TC_01_testSearchCityByName</a> <!-- method navigator-link -->
+                        <a href="#" panel-name="suite-Weather_API_Test_Suite" title="tests.AirPollutionTest" class="method navigator-link" hash-for-method="testGetAirPollutionByCity">testGetAirPollutionByCity</a> <!-- method navigator-link -->
                       </span>
                       <br/>
                       <span>
                         <img src="passed.png" width="3%"/>
-                        <a href="#" panel-name="suite-Weather_API_Test_Suite" title="tests.AirPollutionTest" class="method navigator-link" hash-for-method="TC_02_testAirQualityByCity">TC_02_testAirQualityByCity</a> <!-- method navigator-link -->
+                        <a href="#" panel-name="suite-Weather_API_Test_Suite" title="tests.GeoCodingTest" class="method navigator-link" hash-for-method="testSearchByZipcode">testSearchByZipcode</a> <!-- method navigator-link -->
                       </span>
                       <br/>
                       <span>
                         <img src="passed.png" width="3%"/>
-                        <a href="#" panel-name="suite-Weather_API_Test_Suite" title="tests.GeoCodingTest" class="method navigator-link" hash-for-method="TC_02_testSearchByZipcode">TC_02_testSearchByZipcode</a> <!-- method navigator-link -->
+                        <a href="#" panel-name="suite-Weather_API_Test_Suite" title="tests.GeoCodingTest" class="method navigator-link" hash-for-method="testSearchCityByName">testSearchCityByName</a> <!-- method navigator-link -->
                       </span>
                       <br/>
                       <span>
                         <img src="passed.png" width="3%"/>
-                        <a href="#" panel-name="suite-Weather_API_Test_Suite" title="tests.GeoCodingTest" class="method navigator-link" hash-for-method="TC_03_testSearchCityWithoutApiKey">TC_03_testSearchCityWithoutApiKey</a> <!-- method navigator-link -->
+                        <a href="#" panel-name="suite-Weather_API_Test_Suite" title="tests.GeoCodingTest" class="method navigator-link" hash-for-method="testSearchCityWithoutApiKey">testSearchCityWithoutApiKey</a> <!-- method navigator-link -->
                       </span>
                       <br/>
                     </div> <!-- method-list-content passed suite-Weather_API_Test_Suite -->
@@ -146,23 +146,23 @@
             <div class="main-panel-content rounded-window-bottom">
               <div class="method">
                 <div class="method-content">
-                  <a name="TC_01_testSearchCityByName">
-                  </a> <!-- TC_01_testSearchCityByName -->
-                  <span class="method-name">TC_01_testSearchCityByName</span>
+                  <a name="testSearchByZipcode">
+                  </a> <!-- testSearchByZipcode -->
+                  <span class="method-name">testSearchByZipcode</span>
                 </div> <!-- method-content -->
               </div> <!-- method -->
               <div class="method">
                 <div class="method-content">
-                  <a name="TC_02_testSearchByZipcode">
-                  </a> <!-- TC_02_testSearchByZipcode -->
-                  <span class="method-name">TC_02_testSearchByZipcode</span>
+                  <a name="testSearchCityByName">
+                  </a> <!-- testSearchCityByName -->
+                  <span class="method-name">testSearchCityByName</span>
                 </div> <!-- method-content -->
               </div> <!-- method -->
               <div class="method">
                 <div class="method-content">
-                  <a name="TC_03_testSearchCityWithoutApiKey">
-                  </a> <!-- TC_03_testSearchCityWithoutApiKey -->
-                  <span class="method-name">TC_03_testSearchCityWithoutApiKey</span>
+                  <a name="testSearchCityWithoutApiKey">
+                  </a> <!-- testSearchCityWithoutApiKey -->
+                  <span class="method-name">testSearchCityWithoutApiKey</span>
                 </div> <!-- method-content -->
               </div> <!-- method -->
             </div> <!-- main-panel-content rounded-window-bottom -->
@@ -175,16 +175,16 @@
             <div class="main-panel-content rounded-window-bottom">
               <div class="method">
                 <div class="method-content">
-                  <a name="TC_01_testGetAirPollutionByCity">
-                  </a> <!-- TC_01_testGetAirPollutionByCity -->
-                  <span class="method-name">TC_01_testGetAirPollutionByCity</span>
+                  <a name="testAirQualityByCity">
+                  </a> <!-- testAirQualityByCity -->
+                  <span class="method-name">testAirQualityByCity</span>
                 </div> <!-- method-content -->
               </div> <!-- method -->
               <div class="method">
                 <div class="method-content">
-                  <a name="TC_02_testAirQualityByCity">
-                  </a> <!-- TC_02_testAirQualityByCity -->
-                  <span class="method-name">TC_02_testAirQualityByCity</span>
+                  <a name="testGetAirPollutionByCity">
+                  </a> <!-- testGetAirPollutionByCity -->
+                  <span class="method-name">testGetAirPollutionByCity</span>
                 </div> <!-- method-content -->
               </div> <!-- method -->
             </div> <!-- main-panel-content rounded-window-bottom -->
@@ -201,7 +201,6 @@
 &lt;suite name=&quot;Weather API Test Suite&quot; guice-stage=&quot;DEVELOPMENT&quot; verbose=&quot;0&quot;&gt;
   &lt;test thread-count=&quot;5&quot; name=&quot;Geo API Tests&quot; verbose=&quot;0&quot;&gt;
     &lt;classes&gt;
-      &lt;class name=&quot;base.TestSuiteSetup&quot;/&gt;
       &lt;class name=&quot;tests.GeoCodingTest&quot;/&gt;
       &lt;class name=&quot;tests.AirPollutionTest&quot;/&gt;
     &lt;/classes&gt;
@@ -217,7 +216,7 @@
           <div class="main-panel-content rounded-window-bottom">
             <ul>
               <li>
-                <span class="test-name">Geo API Tests (3 classes)</span>
+                <span class="test-name">Geo API Tests (2 classes)</span>
               </li>
             </ul>
           </div> <!-- main-panel-content rounded-window-bottom -->
@@ -245,30 +244,30 @@ data.addColumn('string', 'Class');
 data.addColumn('number', 'Time (ms)');
 data.addRows(5);
 data.setCell(0, 0, 0)
-data.setCell(0, 1, 'TC_01_testSearchCityByName')
+data.setCell(0, 1, 'testSearchByZipcode')
 data.setCell(0, 2, 'tests.GeoCodingTest')
-data.setCell(0, 3, 2206);
+data.setCell(0, 3, 2371);
 data.setCell(1, 0, 1)
-data.setCell(1, 1, 'TC_02_testAirQualityByCity')
-data.setCell(1, 2, 'tests.AirPollutionTest')
-data.setCell(1, 3, 907);
+data.setCell(1, 1, 'testSearchCityByName')
+data.setCell(1, 2, 'tests.GeoCodingTest')
+data.setCell(1, 3, 1203);
 data.setCell(2, 0, 2)
-data.setCell(2, 1, 'TC_01_testGetAirPollutionByCity')
+data.setCell(2, 1, 'testAirQualityByCity')
 data.setCell(2, 2, 'tests.AirPollutionTest')
-data.setCell(2, 3, 847);
+data.setCell(2, 3, 965);
 data.setCell(3, 0, 3)
-data.setCell(3, 1, 'TC_02_testSearchByZipcode')
-data.setCell(3, 2, 'tests.GeoCodingTest')
-data.setCell(3, 3, 207);
+data.setCell(3, 1, 'testGetAirPollutionByCity')
+data.setCell(3, 2, 'tests.AirPollutionTest')
+data.setCell(3, 3, 694);
 data.setCell(4, 0, 4)
-data.setCell(4, 1, 'TC_03_testSearchCityWithoutApiKey')
+data.setCell(4, 1, 'testSearchCityWithoutApiKey')
 data.setCell(4, 2, 'tests.GeoCodingTest')
-data.setCell(4, 3, 175);
+data.setCell(4, 3, 298);
 window.suiteTableData['Weather_API_Test_Suite']= { tableData: data, tableDiv: 'times-div-Weather_API_Test_Suite'}
 return data;
 }
               </script>
-              <span class="suite-total-time">Total running time: 4 seconds</span>
+              <span class="suite-total-time">Total running time: 5 seconds</span>
               <div id="times-div-Weather_API_Test_Suite">
               </div> <!-- times-div-Weather_API_Test_Suite -->
             </div> <!-- times-div -->
@@ -283,9 +282,18 @@ return data;
         </div> <!-- panel -->
         <div panel-name="ignored-methods-Weather_API_Test_Suite" class="panel">
           <div class="main-panel-header rounded-window-top">
-            <span class="header-content">0 ignored methods</span>
+            <span class="header-content">2 ignored methods</span>
           </div> <!-- main-panel-header rounded-window-top -->
           <div class="main-panel-content rounded-window-bottom">
+            <div class="ignored-class-div">
+              <span class="ignored-class-name">tests.AirPollutionTest</span>
+              <div class="ignored-methods-div">
+                <span class="ignored-method-name">beforeSuite</span>
+                <br/>
+                <span class="ignored-method-name">afterSuite</span>
+                <br/>
+              </div> <!-- ignored-methods-div -->
+            </div> <!-- ignored-class-div -->
           </div> <!-- main-panel-content rounded-window-bottom -->
         </div> <!-- panel -->
         <div panel-name="chronological-Weather_API_Test_Suite" class="panel">
@@ -294,59 +302,40 @@ return data;
           </div> <!-- main-panel-header rounded-window-top -->
           <div class="main-panel-content rounded-window-bottom">
             <div class="chronological-class">
-              <div class="chronological-class-name">base.TestSuiteSetup</div> <!-- chronological-class-name -->
+              <div class="chronological-class-name">tests.GeoCodingTest</div> <!-- chronological-class-name -->
               <div class="configuration-suite before">
                 <span class="method-name">beforeSuite</span>
                 <span class="method-start">0 ms</span>
               </div> <!-- configuration-suite before -->
-            </div> <!-- chronological-class -->
-            <div class="chronological-class">
-              <div class="chronological-class-name">tests.GeoCodingTest</div> <!-- chronological-class-name -->
-              <div class="configuration-class before">
-                <span class="method-name">setup</span>
-                <span class="method-start">237 ms</span>
-              </div> <!-- configuration-class before -->
               <div class="test-method">
-                <span class="method-name">TC_01_testSearchCityByName</span>
-                <span class="method-start">600 ms</span>
+                <span class="method-name">testSearchByZipcode</span>
+                <span class="method-start">570 ms</span>
               </div> <!-- test-method -->
               <div class="test-method">
-                <span class="method-name">TC_02_testSearchByZipcode</span>
-                <span class="method-start">2810 ms</span>
+                <span class="method-name">testSearchCityByName</span>
+                <span class="method-start">2943 ms</span>
               </div> <!-- test-method -->
               <div class="test-method">
-                <span class="method-name">TC_03_testSearchCityWithoutApiKey</span>
-                <span class="method-start">3020 ms</span>
+                <span class="method-name">testSearchCityWithoutApiKey</span>
+                <span class="method-start">4147 ms</span>
               </div> <!-- test-method -->
-              <div class="configuration-class after">
-                <span class="method-name">tearDown</span>
-                <span class="method-start">3197 ms</span>
-              </div> <!-- configuration-class after -->
             </div> <!-- chronological-class -->
             <div class="chronological-class">
               <div class="chronological-class-name">tests.AirPollutionTest</div> <!-- chronological-class-name -->
-              <div class="configuration-class before">
-                <span class="method-name">setup</span>
-                <span class="method-start">3201 ms</span>
-              </div> <!-- configuration-class before -->
               <div class="test-method">
-                <span class="method-name">TC_01_testGetAirPollutionByCity</span>
-                <span class="method-start">3201 ms</span>
+                <span class="method-name">testAirQualityByCity</span>
+                <span class="method-start">4448 ms</span>
               </div> <!-- test-method -->
               <div class="test-method">
-                <span class="method-name">TC_02_testAirQualityByCity</span>
-                <span class="method-start">4048 ms</span>
+                <span class="method-name">testGetAirPollutionByCity</span>
+                <span class="method-start">5414 ms</span>
               </div> <!-- test-method -->
-              <div class="configuration-class after">
-                <span class="method-name">tearDown</span>
-                <span class="method-start">4960 ms</span>
-              </div> <!-- configuration-class after -->
             </div> <!-- chronological-class -->
             <div class="chronological-class">
-              <div class="chronological-class-name">base.TestSuiteSetup</div> <!-- chronological-class-name -->
+              <div class="chronological-class-name">tests.GeoCodingTest</div> <!-- chronological-class-name -->
               <div class="configuration-suite after">
                 <span class="method-name">afterSuite</span>
-                <span class="method-start">5017 ms</span>
+                <span class="method-start">6148 ms</span>
               </div> <!-- configuration-suite after -->
           </div> <!-- main-panel-content rounded-window-bottom -->
         </div> <!-- panel -->

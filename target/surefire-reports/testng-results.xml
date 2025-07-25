@@ -2,59 +2,41 @@
 <testng-results ignored="0" total="5" passed="5" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2025-07-16T18:09:46 ICT" name="Weather API Test Suite" finished-at="2025-07-16T18:09:51 ICT" duration-ms="4746">
+  <suite started-at="2025-07-25T15:42:16 ICT" name="Weather API Test Suite" finished-at="2025-07-25T15:42:22 ICT" duration-ms="5562">
     <groups>
     </groups>
-    <test started-at="2025-07-16T18:09:46 ICT" name="Geo API Tests" finished-at="2025-07-16T18:09:51 ICT" duration-ms="4746">
-      <class name="base.TestSuiteSetup">
-        <test-method is-config="true" signature="beforeSuite()[pri:0, instance:base.TestSuiteSetup@17046283]" started-at="2025-07-16T18:09:46 ICT" name="beforeSuite" finished-at="2025-07-16T18:09:46 ICT" duration-ms="214" status="PASS">
+    <test started-at="2025-07-25T15:42:16 ICT" name="Geo API Tests" finished-at="2025-07-25T15:42:22 ICT" duration-ms="5562">
+      <class name="tests.GeoCodingTest">
+        <test-method is-config="true" signature="beforeSuite()[pri:0, instance:tests.GeoCodingTest@3d51f06e]" started-at="2025-07-25T15:42:16 ICT" name="beforeSuite" finished-at="2025-07-25T15:42:16 ICT" duration-ms="546" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- beforeSuite -->
-        <test-method is-config="true" signature="afterSuite()[pri:0, instance:base.TestSuiteSetup@17046283]" started-at="2025-07-16T18:09:51 ICT" name="afterSuite" finished-at="2025-07-16T18:09:51 ICT" duration-ms="399" status="PASS">
+        <test-method signature="testSearchByZipcode()[pri:0, instance:tests.GeoCodingTest@3d51f06e]" started-at="2025-07-25T15:42:16 ICT" name="testSearchByZipcode" finished-at="2025-07-25T15:42:19 ICT" duration-ms="2371" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testSearchByZipcode -->
+        <test-method signature="testSearchCityByName()[pri:0, instance:tests.GeoCodingTest@3d51f06e]" started-at="2025-07-25T15:42:19 ICT" name="testSearchCityByName" finished-at="2025-07-25T15:42:20 ICT" duration-ms="1203" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testSearchCityByName -->
+        <test-method signature="testSearchCityWithoutApiKey()[pri:0, instance:tests.GeoCodingTest@3d51f06e]" started-at="2025-07-25T15:42:20 ICT" name="testSearchCityWithoutApiKey" finished-at="2025-07-25T15:42:20 ICT" duration-ms="298" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testSearchCityWithoutApiKey -->
+        <test-method is-config="true" signature="afterSuite()[pri:0, instance:tests.GeoCodingTest@3d51f06e]" started-at="2025-07-25T15:42:22 ICT" name="afterSuite" finished-at="2025-07-25T15:42:22 ICT" duration-ms="306" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- afterSuite -->
-      </class> <!-- base.TestSuiteSetup -->
-      <class name="tests.GeoCodingTest">
-        <test-method is-config="true" signature="setup()[pri:0, instance:tests.GeoCodingTest@9353778]" started-at="2025-07-16T18:09:46 ICT" name="setup" finished-at="2025-07-16T18:09:46 ICT" duration-ms="358" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- setup -->
-        <test-method signature="TC_01_testSearchCityByName()[pri:0, instance:tests.GeoCodingTest@9353778]" started-at="2025-07-16T18:09:46 ICT" name="TC_01_testSearchCityByName" finished-at="2025-07-16T18:09:49 ICT" duration-ms="2206" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- TC_01_testSearchCityByName -->
-        <test-method signature="TC_02_testSearchByZipcode()[pri:0, instance:tests.GeoCodingTest@9353778]" started-at="2025-07-16T18:09:49 ICT" name="TC_02_testSearchByZipcode" finished-at="2025-07-16T18:09:49 ICT" duration-ms="207" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- TC_02_testSearchByZipcode -->
-        <test-method signature="TC_03_testSearchCityWithoutApiKey()[pri:0, instance:tests.GeoCodingTest@9353778]" started-at="2025-07-16T18:09:49 ICT" name="TC_03_testSearchCityWithoutApiKey" finished-at="2025-07-16T18:09:49 ICT" duration-ms="175" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- TC_03_testSearchCityWithoutApiKey -->
-        <test-method is-config="true" signature="tearDown()[pri:0, instance:tests.GeoCodingTest@9353778]" started-at="2025-07-16T18:09:49 ICT" name="tearDown" finished-at="2025-07-16T18:09:49 ICT" duration-ms="0" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tearDown -->
       </class> <!-- tests.GeoCodingTest -->
       <class name="tests.AirPollutionTest">
-        <test-method signature="TC_01_testGetAirPollutionByCity()[pri:0, instance:tests.AirPollutionTest@6a28ffa4]" started-at="2025-07-16T18:09:49 ICT" name="TC_01_testGetAirPollutionByCity" finished-at="2025-07-16T18:09:50 ICT" duration-ms="847" status="PASS">
+        <test-method signature="testAirQualityByCity()[pri:0, instance:tests.AirPollutionTest@130161f7]" started-at="2025-07-25T15:42:20 ICT" name="testAirQualityByCity" finished-at="2025-07-25T15:42:21 ICT" duration-ms="965" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- TC_01_testGetAirPollutionByCity -->
-        <test-method is-config="true" signature="setup()[pri:0, instance:tests.AirPollutionTest@6a28ffa4]" started-at="2025-07-16T18:09:49 ICT" name="setup" finished-at="2025-07-16T18:09:49 ICT" duration-ms="0" status="PASS">
+        </test-method> <!-- testAirQualityByCity -->
+        <test-method signature="testGetAirPollutionByCity()[pri:0, instance:tests.AirPollutionTest@130161f7]" started-at="2025-07-25T15:42:21 ICT" name="testGetAirPollutionByCity" finished-at="2025-07-25T15:42:22 ICT" duration-ms="694" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- setup -->
-        <test-method signature="TC_02_testAirQualityByCity()[pri:0, instance:tests.AirPollutionTest@6a28ffa4]" started-at="2025-07-16T18:09:50 ICT" name="TC_02_testAirQualityByCity" finished-at="2025-07-16T18:09:51 ICT" duration-ms="907" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- TC_02_testAirQualityByCity -->
-        <test-method is-config="true" signature="tearDown()[pri:0, instance:tests.AirPollutionTest@6a28ffa4]" started-at="2025-07-16T18:09:51 ICT" name="tearDown" finished-at="2025-07-16T18:09:51 ICT" duration-ms="0" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- tearDown -->
+        </test-method> <!-- testGetAirPollutionByCity -->
       </class> <!-- tests.AirPollutionTest -->
     </test> <!-- Geo API Tests -->
   </suite> <!-- Weather API Test Suite -->

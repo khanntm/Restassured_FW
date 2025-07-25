@@ -1,0 +1,19 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "required": ["name", "lat", "lon", "country"],
+    "properties": {
+      "name": { "type": "string" },
+      "lat": { "type": "number" },
+      "lon": { "type": "number" },
+      "country": { "type": "string" },
+      "state": { "type": ["string", "null"] },
+      "local_names": {
+        "type": "object",
+        "additionalProperties": { "type": "string" }
+      }
+    }
+  }
+}
